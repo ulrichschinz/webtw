@@ -1,0 +1,29 @@
+---
+compile:
+  stage: build
+  image: clojure
+  script: "clojure -T:build ci"
+  artifacts:
+    paths:
+      - target/webtw-0.1.0-SNAPSHOT.jar
+    expire_in: 1 week
+container:
+  stage: build
+  image: docker:stable
+  services:
+    - name: docker:dind
+      alias: tdh
+  variables:
+    DOCKER_HOST: tcp://tdh:2375/
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $CI_REGISTRY/schinzde/webtw:${CI_COMMIT_REF_NAME} .
+    - docker push $CI_REGISTRY/schinzde/webtw:${CI_COMMIT_REF_NAME}
+    - docker logout
+  needs:
+    - job: compile
+      artifacts: true
+  only:
+    - prod

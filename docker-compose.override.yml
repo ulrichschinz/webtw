@@ -1,0 +1,30 @@
+---
+version: '3'
+services:
+  webtw:
+    environment:
+      - BASIC_AUTH_USER=${BAU}
+      - BASIC_AUTH_PASS=${BAP}
+    networks:
+      - proxynet
+    volumes:
+      - /home/uli/.dotfiles/taskwarrior/taskrc:/home/uli/.taskrc
+      - /home/uli/.dotfiles/taskwarrior:/home/uli/.task
+      - /home/uli/.dotfiles/taskwarrior/taskrc.inc:/opt/app/taskrc.inc
+      - /usr/share/doc/task/rc/dark-violets-256.theme:/usr/share/doc/task/rc/dark-violets-256.theme
+    labels:
+      - "traefik.http.routers.webtw-http.entrypoints=web"
+      - "traefik.http.routers.webtw-http.rule=Host(`webtw.schinz.de`)"
+      - "traefik.http.routers.webtw-http.middlewares=webtw-https"
+      - "traefik.http.middlewares.webtw-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.webtw.rule=Host(`webtw.schinz.de`)"
+      - "traefik.http.routers.webtw.entrypoints=websecure"
+      - "traefik.http.routers.webtw.service=svc_webtw"
+      - "traefik.http.services.svc_webtw.loadbalancer.server.port=4040"
+      - "traefik.http.routers.webtw.tls=true"
+      - "traefik.http.routers.webtw.tls.certresolver=letsencrypt"
+
+networks:
+  proxynet:
+    name: reverse-proxy_reverse-proxy
+    external: true

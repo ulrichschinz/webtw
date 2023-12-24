@@ -1,0 +1,7 @@
+---
+version: '3'
+services:
+  webtw:
+    image: dreg.schinz.de:5000/schinzde/webtw:prod
+    container_name: webtw
+    restart: always

@@ -1,0 +1,77 @@
+body {
+  background-color: #ecf2d9;
+  display: grid;
+  min-height: 100vh;
+  grid-template-areas:
+    'nav'
+    'main';
+  grid-template-rows: auto 5fr;
+}
+
+nav { grid-area: nav; }
+main { grid-area: main; }
+#title { grid-area: title; }
+#navitems { grid-area: navitems; }
+
+#title img,
+#title h2 {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#title img {
+  margin-right: 10px;
+}
+
+/**
+@media (min-width: 800px) {
+  body {
+    grid-template-areas:
+      'nav main';
+    grid-template-columns: 3fr 10fr;
+    grid-template-rows: 1fr;
+  }
+
+  #contexts-field, #projects-field {
+    display: inline-block;
+    padding: 1em;
+  }
+  /** #due-options, #ctx-options, #project-options {
+      display: inline-block;
+      padding: 1em;
+  } */
+
+/**  #newtask-submit, #taskdescription {
+    padding: 1em;
+  }
+
+}
+
+
+#home {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.ctx-select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2em;
+  padding-bottom: 1em;
+}
+
+#newtask-submit, #taskdescription, #ctx-options, #project-options, #due-options {
+    padding-top: 1em;
+}
+
+#ctx {
+  display: inline-block;
+  border: solid #3eaf80;
+  background-color: white;
+  border-radius: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-left:1em;
+}
+**/
