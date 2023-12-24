@@ -12,7 +12,7 @@ These are:
 
 ## Installation
 
-Download from https://github.com/de.schinz/webtw-backend
+Clone it: [WebTW Repository](https://github.com/ulrichschinz/webtw)
 
 ## Build and start jar
 
